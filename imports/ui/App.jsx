@@ -5,8 +5,7 @@ import preset from 'jss-preset-default';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import createPalette from 'material-ui/styles/palette';
 import createGenerateClassName from 'material-ui/styles/createGenerateClassName';
-import { green, red } from 'material-ui/colors';
-import AppBar from "./components/AppBar";
+import Nav from "./components/Nav";
 
 const styles = {
   main: {
@@ -32,7 +31,7 @@ class App extends Component {
       <div className={this.props.classes.main}>
         <JssProvider registry={sheetsRegistry} jss={jss}>
           <MuiThemeProvider theme={theme} sheetsManager={new Map()}>
-            <AppBar />
+            <Nav />
           </MuiThemeProvider>
         </JssProvider>
       </div>
