@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {withStyles} from 'material-ui/styles';
 import {
   AppBar,
@@ -15,6 +16,7 @@ import {
 import HomeIcon from 'material-ui-icons/Home';
 import MenuIcon from 'material-ui-icons/Menu';
 import ViewAgendaIcon from 'material-ui-icons/ViewAgenda';
+import {Link} from "react-router-dom";
 
 const styles = {
   root: {
@@ -34,14 +36,8 @@ class Nav extends Component {
     open: false
   };
 
-  handleClose = () => {
-    console.log("should be closing");
-    this.setState({open: false});
-  };
-  handleToggle = () => {
-    console.log("should be toggling");
-    this.setState({open: !this.state.open});
-  };
+  handleClose = () => this.setState({open: false});
+  handleToggle = () => this.setState({open: !this.state.open});
 
   render() {
     return (
@@ -67,13 +63,15 @@ class Nav extends Component {
           onClick={this.handleClose}
         >
           <List className={this.props.classes.list} disablePadding>
-            <ListItem button>
+            <ListItem button
+                      component={props => <Link to="/"{...props} />}>
               <ListItemIcon>
-                <HomeIcon />
+                <HomeIcon/>
               </ListItemIcon>
               <ListItemText primary="Home"/>
             </ListItem>
-            <ListItem button>
+            <ListItem button
+                      component={props => <Link to="/semesters" {...props} />}>
               <ListItemIcon>
                 <ViewAgendaIcon/>
               </ListItemIcon>

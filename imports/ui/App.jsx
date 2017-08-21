@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
-import injectSheet, { JssProvider, SheetsRegistry } from 'react-jss'
-import { create } from 'jss';
+import {JssProvider, SheetsRegistry} from 'react-jss'
+import {create} from 'jss';
 import preset from 'jss-preset-default';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import {MuiThemeProvider, createMuiTheme, withStyles} from 'material-ui/styles';
 import createPalette from 'material-ui/styles/palette';
 import createGenerateClassName from 'material-ui/styles/createGenerateClassName';
 import Nav from "./components/Nav";
+import {
+  BrowserRouter as Router,
+  Route,
+  withRouter,
+} from 'react-router-dom';
+import Semesters from "./Semesters";
+import Home from "./Home";
 
 const styles = {
   main: {
@@ -14,6 +21,8 @@ const styles = {
 };
 
 class App extends Component {
+  renderSemesters = () => true ? <Semesters/> : <Home/>;
+
   render() {
     // Create a sheetsRegistry instance.
     const sheetsRegistry = new SheetsRegistry();
@@ -31,7 +40,13 @@ class App extends Component {
       <div className={this.props.classes.main}>
         <JssProvider registry={sheetsRegistry} jss={jss}>
           <MuiThemeProvider theme={theme} sheetsManager={new Map()}>
-            <Nav />
+            <Router>
+              <div>
+                <Nav />
+                <Route exact path="/" component={Home}/>
+                <Route exact path="/semesters" render={this.renderSemesters}/>
+              </div>
+            </Router>
           </MuiThemeProvider>
         </JssProvider>
       </div>
@@ -39,4 +54,4 @@ class App extends Component {
   }
 }
 
-export default injectSheet(styles)(App);
+export default withStyles(styles)(App);
