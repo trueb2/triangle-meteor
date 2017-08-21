@@ -6,6 +6,7 @@ import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import createPalette from 'material-ui/styles/palette';
 import createGenerateClassName from 'material-ui/styles/createGenerateClassName';
 import { green, red } from 'material-ui/colors';
+import AppBar from "./components/AppBar";
 
 const styles = {
   main: {
@@ -20,11 +21,7 @@ class App extends Component {
 
     // Create a theme instance.
     const theme = createMuiTheme({
-      palette: createPalette({
-        primary: green,
-        accent: red,
-        type: 'light',
-      }),
+      palette: createPalette(),
     });
 
     // Configure JSS
@@ -35,7 +32,7 @@ class App extends Component {
       <div className={this.props.classes.main}>
         <JssProvider registry={sheetsRegistry} jss={jss}>
           <MuiThemeProvider theme={theme} sheetsManager={new Map()}>
-            <h1>Triangle</h1>
+            <AppBar />
           </MuiThemeProvider>
         </JssProvider>
       </div>
