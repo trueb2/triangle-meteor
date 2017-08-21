@@ -12,8 +12,9 @@ import {
   Toolbar,
   Typography,
 } from 'material-ui';
-import InboxIcon from 'material-ui-icons/Inbox';
+import HomeIcon from 'material-ui-icons/Home';
 import MenuIcon from 'material-ui-icons/Menu';
+import ViewAgendaIcon from 'material-ui-icons/ViewAgenda';
 
 const styles = {
   root: {
@@ -33,8 +34,14 @@ class Nav extends Component {
     open: false
   };
 
-  handleClose = () => this.setState({open: false});
-  handleToggle = () => this.setState({open: !this.state.open});
+  handleClose = () => {
+    console.log("should be closing");
+    this.setState({open: false});
+  };
+  handleToggle = () => {
+    console.log("should be toggling");
+    this.setState({open: !this.state.open});
+  };
 
   render() {
     return (
@@ -55,20 +62,20 @@ class Nav extends Component {
         </AppBar>
 
         <Drawer
-          open={this.props.open}
+          open={this.state.open}
           onRequestClose={this.handleClose}
           onClick={this.handleClose}
         >
           <List className={this.props.classes.list} disablePadding>
             <ListItem button>
               <ListItemIcon>
-                <InboxIcon/>
+                <HomeIcon />
               </ListItemIcon>
               <ListItemText primary="Home"/>
             </ListItem>
             <ListItem button>
               <ListItemIcon>
-                <InboxIcon/>
+                <ViewAgendaIcon/>
               </ListItemIcon>
               <ListItemText primary="Semesters"/>
             </ListItem>
